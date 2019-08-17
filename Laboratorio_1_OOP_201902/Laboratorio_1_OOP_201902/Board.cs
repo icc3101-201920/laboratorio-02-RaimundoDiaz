@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Laboratorio_1_OOP_201902
 {
-    public class Board
+    public class Board : Game
     {
         //Constantes
         private const int DEFAULT_NUMBER_OF_PLAYERS = 2;
@@ -106,58 +106,171 @@ namespace Laboratorio_1_OOP_201902
         
 
         //Metodos
-        public void AddMeleeCard(int PlayerId, CombatCard combatCard)
+        public void AddCombatCard(int PlayerId , CombatCard combatCard)
+        {
+            switch (combatCard.Type)
+            {
+                case "melee":
+                    AddMeleeCard(PlayerId, combatCard);
+                    break;
+                case "range":
+                    AddRangeCard(PlayerId, combatCard);
+                    break;
+                case "longRange":
+                    AddLongRangeCard(PlayerId, combatCard);
+                    break;
+                default:
+                    Console.WriteLine(" Invalid Combat Card Type, must be 'melee', 'range' or 'longRange' ");
+                    break;
+            }
+
+        }
+        public void AddMeleeCard(int playerId, CombatCard combatCard)
+        {
+            MeleeCards[playerId - 1].Add(combatCard);
+        }
+        public void AddRangeCard(int playerId, CombatCard combatCard)
+        {
+            RangeCards[playerId - 1].Add(combatCard);
+        }
+        public void AddLongRangeCard(int playerId, CombatCard combatCard)
+        {
+            LongRangeCards[playerId - 1].Add(combatCard);
+        }
+        public void AddSpecialCard(SpecialCard specialCard, int playerId, string buffType)
+        {
+            switch (specialCard.Type)
+            {
+                case "captainCard":
+                    if (
+                        SpecialMeleeCards[playerId - 1] == null &&   // COMO SOLO PUEDE HABER UNA SPECIALCARD HAGO EL &&
+                        SpecialRangeCards[playerId - 1] == null &&
+                        SpecialLongRangeCards[playerId - 1] == null &&
+                        CaptainCards[playerId - 1] == null
+                        )
+                    {
+                        SpecialMeleeCards[playerId - 1].Add(specialCard);
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("There is a SpecialCard already on the board");
+                    }
+
+                    break;
+
+                case "specialMelee":
+                    if (
+                        SpecialMeleeCards[playerId - 1] == null &&   // COMO SOLO PUEDE HABER UNA SPECIALCARD HAGO EL &&
+                        SpecialRangeCards[playerId - 1] == null &&
+                        SpecialLongRangeCards[playerId - 1] == null &&
+                        CaptainCards[playerId - 1] == null
+                        )
+                    {
+                        SpecialMeleeCards[playerId - 1].Add(specialCard);
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("There is a SpecialCard already on the board");
+                    }
+
+                    break;
+
+                case "specialRange":
+                    if (
+                        SpecialMeleeCards[playerId - 1] == null &&   // COMO SOLO PUEDE HABER UNA SPECIALCARD HAGO EL &&
+                        SpecialRangeCards[playerId - 1] == null &&
+                        SpecialLongRangeCards[playerId - 1] == null &&
+                        CaptainCards[playerId - 1] == null
+                        )
+                    {
+                        SpecialRangeCards[playerId - 1].Add(specialCard);
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("There is a SpecialCard already on the board");
+                    }
+
+                    break;
+                case "specialLongRange":
+                    if (
+                        SpecialMeleeCards[playerId - 1] == null &&   // COMO SOLO PUEDE HABER UNA SPECIALCARD HAGO EL &&
+                        SpecialRangeCards[playerId - 1] == null &&
+                        SpecialLongRangeCards[playerId - 1] == null &&
+                        CaptainCards[playerId - 1] == null
+                        )
+                    {
+                        SpecialLongRangeCards[playerId - 1].Add(specialCard);
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("There is a SpecialCard already on the board");
+                    }
+
+                    break;
+
+                default:
+                    Console.WriteLine(" Invalid Special Card Type, must be 'specialMelee', 'specialRange', 'specialLongRange' or 'captainCard' ");
+                    break;
+            }
+        }
+        public void AddCaptainCard(int playerId, SpecialCard specialCard)
+        {
+            CaptainCards[playerId - 1].Add(specialCard);
+        }
+        public void AddWeatherCard(int playerId, SpecialCard specialCard)
         {
             throw new NotImplementedException();
         }
-        public void AddRangeCard(int PlayerId, CombatCard combatCard)
+        public void DestroyCombatCard(int playerId)
+        {
+            DestroyMeleeCard(playerId);
+            DestroyMeleeCard(playerId);
+            DestroyLongRangeCard(playerId);
+        }
+        public void DestroyMeleeCard(int playerId)
+        {
+            MeleeCards[playerId - 1].Clear();
+        }
+        public void DestroyRangeCard(int playerId)
+        {
+            RangeCards[playerId - 1].Clear();
+        }
+        public void DestroyLongRangeCard(int playerId)
+        {
+            LongRangeCards[playerId - 1].Clear();
+        }
+        public void DestroySpecialCards()
+        {
+            //SpecialMeleeCards[0].Clear();
+            //SpecialRangeCards[0].Clear();
+            //SpecialLongRangeCards[0].Clear();
+        }
+        public void DestroySpecialMeleeCard(int playerId)
+        {
+            //SpecialMeleeCards[playerId - 1].Clear; no entiendo porque tira error, la SpecialMeleeCards no es una lista del mismo tipo que MeleeCards?
+        }
+        public void DestroySpecialRangeCard(int playerId)
+        {
+            //SpecialRangeCards[playerId - 1].Clear();
+        }
+        public void DestroySpecialLongRangeCard(int playerId)
+        {
+            //SpecialLongRangeCards[playerId - 1].Clear();
+        }
+        public void DestroyWeatherCard(int playerId)
         {
             throw new NotImplementedException();
         }
-        public void AddLongRangeCard(int PlayerId, CombatCard combatCard)
-        {
-            throw new NotImplementedException();
-        }
-        public void AddCaptainCard(int PlayerId, SpecialCard specialCard)
-        {
-            throw new NotImplementedException();
-        }
-        public void AddWeatherCard(int PlayerId, SpecialCard specialCard)
-        {
-            throw new NotImplementedException();
-        }
-        public void DestroyMeleeCard(int PlayerId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DestroyRangeCard(int PlayerId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DestroyLongRangeCard(int PlayerId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DestroySpecialMeleeCard(int PlayerId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DestroySpecialRangeCard(int PlayerId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DestroySpecialLongRangeCard(int PlayerId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DestroyWeatherCard(int PlayerId)
-        {
-            throw new NotImplementedException();
-        }
-        public int[] GetMeleeAttackPoints()
-        {
-            throw new NotImplementedException();
-        }
+        //public int[,] GetMeleeAttackPoints()
+        //{
+            //int[,] AP = new { Players[1].AttackPoints, Players[0].AttackPoints };
+            //return AP;
+
+        //}
         public int[] GetRangeAttackPoints()
         {
             throw new NotImplementedException();

@@ -63,11 +63,26 @@ namespace Laboratorio_1_OOP_201902
         //Metodos
         public bool CheckIfEndGame()
         {
-            throw new NotImplementedException();
+            if (Players[0].LifePoints == 0 || Players[1].LifePoints == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
-        public bool GetWinner()
+        public int GetWinner()
         {
-            throw new NotImplementedException();
+            if (Players[0].LifePoints == 0)
+            {
+                return Players[1].Id;
+            }
+            else
+            {
+                return Players[0].Id;
+            }
         }
         public void Play()
         {

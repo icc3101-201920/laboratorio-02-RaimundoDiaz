@@ -4,16 +4,14 @@ using System.Text;
 
 namespace Laboratorio_1_OOP_201902.Card
 {
-    public class SpecialCard
+    public class SpecialCard : Card
     {
         //Atributos
-        private string name;
-        private string type;
         private string buffType;
         private string effect;
 
         //Constructor
-        public SpecialCard(string name, string type, string effect)
+        public SpecialCard(string name, string type, string effect) : base (name, type)
         {
             Name = name;
             Type = type;
@@ -68,6 +66,14 @@ namespace Laboratorio_1_OOP_201902.Card
             }
         }
 
+        internal void Add(SpecialCard specialCard)
+        {
+            throw new NotImplementedException();
+        }
 
+        public static implicit operator SpecialCard(SpecialCard v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

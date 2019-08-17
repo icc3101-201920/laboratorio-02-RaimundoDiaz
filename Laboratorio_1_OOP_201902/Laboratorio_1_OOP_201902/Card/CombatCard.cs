@@ -4,17 +4,15 @@ using System.Text;
 
 namespace Laboratorio_1_OOP_201902.Card
 {
-    public class CombatCard
+    public class CombatCard : Card
     {
         //Atributos
-        private string name;
-        private string type;
         private string effect;
         private int attackPoints;
         private bool hero;
 
         //Constructor
-        public CombatCard(string name, string type, string effect, int attackPoints, bool hero)
+        public CombatCard(string name, string type, string effect, int attackPoints, bool hero) : base(name, type)
         {
             Name = name;
             Type = type;

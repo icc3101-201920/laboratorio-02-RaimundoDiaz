@@ -5,18 +5,16 @@ using System.Text;
 
 namespace Laboratorio_1_OOP_201902
 {
-    public class Hand
+    public class Hand : Deck
     {
-        private List<CombatCard> combatCards;
-        private List<SpecialCard> SpecialCards;
 
-        public Hand()
+        public Hand(List<CombatCard> combatCards, List<SpecialCard> specialCards) : base(combatCards, specialCards)
         {
 
         }
 
         public List<CombatCard> CombatCards { get => combatCards; set => combatCards = value; }
-        public List<SpecialCard> SpecialCards1 { get => SpecialCards; set => SpecialCards = value; }
+        public List<SpecialCard> SpecialCards { get => specialCards; set => specialCards = value; }
 
         
         public void AddCombatCard(CombatCard combatCard) { throw new NotImplementedException(); }
